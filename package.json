@@ -1,5 +1,5 @@
 {
-  "name": "resession",
+  "name": "koa-resession",
   "description": "RethinkDB session for Koa",
   "version": "0.1.0",
   "main": "lib/index.js",
@@ -19,12 +19,14 @@
     "babel-preset-es2015-node4": "*",
     "chai": "*",
     "coveralls": "*",
-    "debug": "^2.2.0",
     "eslint": "^2.10.1",
     "eslint-config-axial": "^1.0.8",
     "isparta": "*",
     "lodash": "^4.12.0",
     "mocha": "*",
     "sinon": "*"
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
   }
 }

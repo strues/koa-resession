@@ -26,8 +26,15 @@ ReSession.prototype.setup = async function() {
 
   try {
     await this.connection.db(this.dbName)
+    .table(this.tableName)
+    .indexCreate('sid');
+  } catch (error) {
+    errors.push(error);
+  }
+
+  try {
+    await this.connection.db(this.dbName)
       .table(this.tableName)
-      .indexCreate('sid')
       .indexCreate('expires')
       .then(() => {
         this.clearInterval = setInterval(function() {
@@ -55,9 +62,11 @@ ReSession.prototype.table = function() {
 
 ReSession.prototype.get = async function(sid) {
   debug('get', sid);
+
   const res = await this.table().getAll(sid, {
     index: 'sid'
   });
+
   debug('got', res[0]);
   return res[0];
 };
@@ -65,12 +74,12 @@ ReSession.prototype.get = async function(sid) {
 ReSession.prototype.set = async function(sid, session) {
   // check if there is a doc with that id
   debug('set', sid, session);
+
   let res = await this.table().getAll(sid, {
     index: 'sid'
   });
 
-  const expiration = new Date(Date.now() +
-  (session.cookie.originalMaxAge || this.browserSessionsMaxAge));
+  const expiration = new Date(Date.now() + this.browserSessionsMaxAge);
 
   if (res[0]) {
     res = res[0];
@@ -83,16 +92,19 @@ ReSession.prototype.set = async function(sid, session) {
     return await this.table().get(res.id).replace(payload);
   } else {
     return await this.table().insert(_.extend({
-      sid
+      sid,
+      expires: expiration
     }, session));
   }
 };
 
 ReSession.prototype.destroy = async function(sid) {
   debug('destroy', sid);
+
   const res = await this.table().getAll(sid, {
     index: 'sid'
   });
+
   if (res[0]) {
     debug('found session to destroy', res[0]);
     return await this.table().get(res[0].id).delete();
