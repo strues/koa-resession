@@ -1,0 +1,30 @@
+{
+  "name": "resession",
+  "description": "RethinkDB session for Koa",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "author": "strues",
+  "repository": "strues/resession",
+  "license": "MIT",
+  "scripts": {
+    "compile": "babel src --out-dir lib",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "prepublish": "npm run compile",
+    "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-eslint": "^6.0.4",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-preset-es2015-node4": "*",
+    "chai": "*",
+    "coveralls": "*",
+    "debug": "^2.2.0",
+    "eslint": "^2.10.1",
+    "eslint-config-axial": "^1.0.8",
+    "isparta": "*",
+    "lodash": "^4.12.0",
+    "mocha": "*",
+    "sinon": "*"
+  }
+}
