@@ -22,8 +22,26 @@ npm install koa-resession
 And include in your project:
 
 ```javascript
-import resession from 'koa-resession';
+import ReSession from 'koa-resession';
+import session from 'koa-generic-session';
+import rethinkdbdash from 'rethinkdbdash';
+
+const sessionStore = new ReSession({
+  connection: rethinkdbdash({host: 'localhost', port: 28015, db: 'session'}),
+  browserSessionsMaxAge: 5000,
+  db: 'session',
+  table: 'sessions'
+});
+sessionStore.setup();
+export default convert(session({
+  store: sessionStore
+}));
 ```
+
+Koa-ReSession depends on rethinkdbdash or the default rethinkdb node.js driver. In addition,
+it is built with koa-generic-session in mind, and based off of koa-generic-session-rethinkdb.
+
+Session information is made available on ctx.session.
 
 ## License
 
