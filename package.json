@@ -1,11 +1,20 @@
 {
   "name": "koa-resession",
-  "description": "RethinkDB session for Koa",
-  "version": "0.1.0",
+  "description": "RethinkDB session for Koa 2",
+  "version": "0.1.1",
   "main": "lib/index.js",
-  "author": "strues",
-  "repository": "strues/resession",
+  "author": "Steven Truesdell <steven@strues.io>",
+  "engines": {
+    "node": ">= 5.1.0",
+    "npm": ">=3.0.0"
+  },
   "license": "MIT",
+  "homepage": "https://github.com/strues/koa-resession",
+  "bugs": "https://github.com/strues/koa-resession/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/koa-resession.git"
+  },
   "scripts": {
     "compile": "babel src --out-dir lib",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
