@@ -9,7 +9,7 @@
 ![dev dependencies](https://img.shields.io/david/dev/strues/koa-resession.svg)
 ![License](https://img.shields.io/npm/l/koa-resession.svg)
 
-RethinkDB session storage for Koa 2.
+RethinkDB session storage for Koa 2. Uses async/await in favor of generator functions.
 
 ## Getting Started
 
@@ -38,11 +38,16 @@ export default convert(session({
 }));
 ```
 
-Koa-ReSession depends on rethinkdbdash or the default rethinkdb node.js driver. In addition,
-it is built with koa-generic-session in mind, and based off of koa-generic-session-rethinkdb.
+`koa-resession` depends on [rethinkdbdash](https://github.com/neumino/rethinkdbdash) or the default rethinkdb node.js driver. In addition,
+it is built for use with [koa-generic-session](https://github.com/koajs/generic-session). This project is based off of  
+[koa-generic-session-rethinkdb](https://github.com/KualiCo/koa-generic-session-rethinkdb). Unfortunately that project seems unmaintained and has a dependency on co due to its usage of generators.
 
 Session information is made available on ctx.session.
 
 ## License
 
 MIT
+
+## ToDo
+- Finish writing tests
+- Show a better example.
