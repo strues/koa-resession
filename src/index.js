@@ -32,27 +32,6 @@ ReSession.prototype.setup = async function() {
     errors.push(error);
   }
 
-  try {
-    await this.connection.db(this.dbName)
-      .table(this.tableName)
-      .indexCreate('expires')
-      .then(() => {
-        this.clearInterval = setInterval(function() {
-          this.connection.db(this.dbName).table(this.tableName)
-            .between(0, this.r.now(), {
-              index: 'expires'
-            })
-            .delete()
-            .run()
-            .tap((result) => {
-              debug('DELETED EXPIRED %j', result);
-            });
-        }, this.clearInt || 60000).unref();
-      });
-  } catch (error) {
-    errors.push(error);
-  }
-
   return errors;
 };
 
@@ -84,8 +63,7 @@ ReSession.prototype.set = async function(sid, session) {
   if (res[0]) {
     res = res[0];
     const payload = _.extend({
-      sid,
-      id: res.id,
+      id: sid,
       expires: expiration
     }, session);
 
