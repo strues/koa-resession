@@ -1,7 +1,7 @@
 {
   "name": "koa-resession",
   "description": "RethinkDB session for Koa 2",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "author": "Steven Truesdell <steven@strues.io>",
   "engines": {
